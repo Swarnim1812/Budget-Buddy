@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="styles/main.css" />
+  <title>Permalist</title>
+</head>
+
+<body>
+  <main>
+  <div class="box" id="heading">
+    <h1>
+      <%= listTitle %>
+    </h1>
+  </div>
+  <div class="box">
+    <h1>Your Products</h1>
+    <% for(let i = 0; i < listItems.length; i++){ %>
+      <div class="item">
+        <form action="/delete" method="post">
+          <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= listItems[i].productURL %>">
+        </form>
+        <div class="img">
+          <img class="images" src=<%= listItems[i].imageUrl %> alt="Description of the image">
+        </div>
+        <p id="title<%=listItems[i].id%>">
+          <%= listItems[i].productURL %>
+          <br>
+          <br>
+          Name of the product : <%= listItems[i].name%>
+          Expected Price is : <%= listItems[i].expectedPrice %>
+          <br>
+          Current Price of Product is : <%= listItems[i].price %>
+        </p>
+
+        <!-- Adding Detail/Arrow button -->
+        <form action="/details" method="post">
+          <input type="checkbox" onchange="this.form.submit()" name="DetailList" value="<%=listItems[i].productURL,listItems[i].expectedPrice %>">
+          <!-- <button class="details" type="enter" name="DetailList" value="<%= listItems[i].productURL %>" >-></button> -->
+        </form>
+      </div>
+      <% } %>
+
+        <form class="item" action="/add" method="post">
+          <label>Product URL</label>
+          <input type="text" required name="newProductURL" />
+          <label>Expected Price</label>
+          <input type="text" required name="newexpectedPrice" />
+          <!-- <input type="text" name="newItem" placeholder="New Item" autocomplete="off" autofocus="true" /> -->
+          <button class="add" type="submit" name="list" value=<%=listTitle %> >+</button>
+        </form>
+  </div>
+
+  <%if (checkUser==true){ %>
+  <div class="box">
+    <h1>All Products</h1>
+    <% for(let i = 0; i < listAllItems.length; i++){ %>
+      <div class="item">
+        <form action="/delete" method="post">
+          <input type="checkbox" onchange="this.form.submit()" name="deleteItemId" value="<%= listAllItems[i].url %>">
+        </form>
+        <div class="img">
+          <img class="images" src=<%= listAllItems[i].imageUrl %> alt="Description of the image">
+        </div>
+        <p id="title<%=listAllItems[i].id%>">
+          <%= listAllItems[i].url %>
+          <br>
+          <br>
+          Name of the product : <%= listAllItems[i].name%>
+          <br>
+          Current Price of Product is : <%= listAllItems[i].price %>
+        </p>
+
+        <!-- Adding Detail/Arrow button -->
+        <form action="/details" method="post">
+          <input type="checkbox" onchange="this.form.submit()" name="DetailList" value="<%=listAllItems[i].url%>">
+          <!-- <button class="details" type="enter" name="DetailList" value="<%= listAllItems[i].url %>" >-></button> -->
+        </form>
+      </div>
+      <% } %>
+  </div>
+  <% } %>
+  <%if (locals.user){ %>
+    <h2>Welcome, <%= locals.user %></h2>
+    <form action="/logout" method="get">
+      <button type="logout">Logout</button>
+      </form>
+  <% } %>
+  <script>
+    function handler(id) {
+      document.getElementById("title" + id).setAttribute("hidden", true)
+      document.getElementById("edit" + id).setAttribute("hidden", true)
+      document.getElementById("done" + id).removeAttribute("hidden")
+      document.getElementById("input" + id).removeAttribute("hidden")
+    }
+  </script>
+</main>
+<footer>Copyright © <%= new Date().getFullYear() %>
+</footer>
+</body>
+`
+</html>

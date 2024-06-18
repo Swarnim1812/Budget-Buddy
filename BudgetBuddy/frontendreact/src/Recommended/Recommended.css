@@ -1,0 +1,21 @@
+.recommended-flex {
+  display: flex;
+  margin-left: 20rem;
+  padding-top: 5rem;
+}
+.recommended-flex button{
+  background-color: rgb(30, 23, 64);
+  padding: 15px;
+  width: 10rem;
+  color: white;
+  border-radius: 50px;
+}
+.recommended-flex button:hover{
+  background-color: rgb(0, 0, 50);
+}
+.recommended-title {
+  margin-left: 20rem;
+  margin-bottom: 20px;
+  margin-top: 20px;
+  font-size: 20px;
+}
