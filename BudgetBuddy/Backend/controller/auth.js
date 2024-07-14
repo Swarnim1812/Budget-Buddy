@@ -1,9 +1,8 @@
-const { bcrypt } = require("../middlewares/auth");
 const { v4: uuidv4 } = require('uuid');
 const User = require("../models/user");
 const { setUser } = require("../service/auth");
 const { containsOnlyDigits } = require("../middlewares/utils");
-const jwt = require('jsonwebtoken');
+const jwt=require('jsonwebtoken');
 
 async function handleUserSignup(req, res) {
     let { firstName, lastName, phone_number, email, password, userType } = req.body;
@@ -53,9 +52,10 @@ async function handleUserSignup(req, res) {
         }
         const check_phonenumber = await User.findOne({ phone_number });
         const check_email = await User.findOne({ email });
-
+        let user;
         if (!check_phonenumber && !check_email) {
-            await User.create({
+
+            user = await User.create({
                 firstName,
                 lastName,
                 phone_number,
@@ -65,15 +65,9 @@ async function handleUserSignup(req, res) {
             });
         }
         console.log("user type:", userType);
-        if (userType == 'user') {
-            //console.log("mai yaha hu")
-            return res.redirect("http://localhost:3000/collections");
-        }
-        if (userType == 'trader') {
-            // Render a message asking the user to verify their email
-            //console.log("herer")
-            return res.redirect("/mail");
-        }
+        return res.status(200).json({
+            user
+        })
     } catch (error) {
         return res.status(400).json({
             status: "error",
@@ -84,14 +78,16 @@ async function handleUserSignup(req, res) {
             },
         })
     }
-    await User.create({
-        firstName,
-        lastName,
-        phone_number,
-        email,
-    })
+    // await User.create({
+    //     firstName,
+    //     lastName,
+    //     phone_number,
+    //     email,
+    // })
 }
+
 async function handleUserLogin(req, res) {
+    console.log("hello from handleUserLogin")
     const email = req.body.email;
     const password = req.body.password;
     try {
@@ -111,7 +107,6 @@ async function handleUserLogin(req, res) {
             }
             );
         }
-
         const user_exist = await User.findOne({ email });
         if (!user_exist) {
             //    return res.render("login",{
@@ -148,9 +143,6 @@ async function handleUserLogin(req, res) {
         return res.status(200).json({
             user_exist
         })
-
-
-        // return res.redirect("/");
     } catch (error) {
         // Handle any other errors
         // return res.render("login", {
@@ -167,10 +159,15 @@ async function handleUserLogin(req, res) {
         )
     }
 }
+const secret = "Lavkesh@123";
 async function handleUserAuth(req, res) {
     const uid = req.cookies.uid;
     if (uid) {
+        const decoded=jwt.verify(uid,secret);
+        console.log(decoded)
+        const user_exist = await User.findOne({ email: decoded.email });
         return res.status(200).json({
+            user_exist,
             status: 'success',
             message: 'Authorizeddddddd',
             uid: uid

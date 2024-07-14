@@ -48,7 +48,8 @@ module.exports = {
                 </body>
                 </html>
             `;
-            return res.render("forget2.ejs",{email: email }) // Render the verify.ejs page with the email
+            // return res.render("forget2.ejs",{email: email }) // Render the verify.ejs page with the email
+            return res.status(200).json({ success: successMessage }); // Render the verify.ejs page with the email
         } catch (error) {
             console.error("Error sending mail:", error);
             res.status(500).send("Error sending mail");
@@ -63,10 +64,12 @@ module.exports = {
         if (otp == req.session.otp) {
             // If OTP is correct, redirect to home page
             console.log("verified");
-      
-           res.redirect("/login");
+            return res.status(200).json({ success: "OTP verified successfully" });
+        //    res.redirect("/login");
         } else {
             // If OTP is incorrect, render the verify page again with an error message
+            console.log("not verified");
+            return res.status(400).json({ error: "Invalid OTP, please try again." });
             res.render("forget2.ejs", { email, error: "Invalid OTP, please try again." });
         }
     }

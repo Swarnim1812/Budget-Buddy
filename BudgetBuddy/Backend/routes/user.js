@@ -30,7 +30,7 @@ router.get("/signup", (req,res)=>{
 
 //Signout
 router.get("/logout",(req,res)=>{
-    console.log("logout hu mai")
+    console.log("logged out...")
     res.cookie("uid",'',{maxAge : 1});
     return res.redirect('/');     
 });

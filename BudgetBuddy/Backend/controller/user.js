@@ -79,7 +79,7 @@ async function deleteDatabase(req, res) {
       listAllItems: listAllProduct,
       checkUser: flag
     }
-    res.render("searchpage", products)
+    res.status(200).json({message:"success", products: products });
 
   } catch (err) {
     console.log(err);
@@ -119,14 +119,9 @@ async function addUrlinDatabase(req, res) {
 async function yourproductlisting(database) {
   let listYourProduct = [];
   for (var index in database) {
-    console.log("umaaaaa");
     const x = database[index].productURL;
-    console.log(x);
-
     const y = await Product.findOne({ url: x });
     let product = JSON.parse(JSON.stringify(database[index]));
-    console.log("oaaaaaaaaa");
-    console.log(y);
     product.name = y.name;
     product.price = y.price;
     product.imageUrl = y.imageUrl;
@@ -138,13 +133,14 @@ async function yourproductlisting(database) {
 //AllYourProduct
 async function allproductlisiting() {
   let listAllProduct = [];
-  for (const index in await Product.find({}, { _id: 1 })) {
-    const y = await Product.find({});
-    let product = [];
-    product.url = y[index].url;
-    product.name = y[index].name;
-    product.price = y[index].price;
-    product.imageUrl = y[index].imageUrl;
+  const products=await Product.find({});
+  for (const index in products) {
+    let product = {};
+    const y = products[index];
+    product.productURL = y.url;
+    product.name = y.name;
+    product.price = y.price;
+    product.imageUrl = y.imageUrl;
     listAllProduct[index] = product;
   }
   return listAllProduct;
@@ -189,7 +185,6 @@ async function add_new_data_in_existing_database(req, res) {
 }
 //get all products
 async function get_products(req, res) {
-  console.log("inside get products11111111111111111111");
   try {
     // console.log(req.user);
     const result = await User.findOne({ email: req.user.email })
@@ -209,14 +204,14 @@ async function get_products(req, res) {
       listAllItems: listAllProduct,
       checkUser: flag
     }
-    console.log(products);
-    console.log("yoyoyyoyo")
+    // console.log(products);
+    // console.log("yoyoyyoyo")
+    console.log("products fetched succesfully");
     return res.status(200).json(products);
   }
   catch (err) {
     console.log(err);
-    return res.status(400).json({ message: "errrrrrrrrrroooooor" });
-
+    return res.status(400).json({ message: "error in fetching products" });
   }
 }
 async function get_curItem(req, res) {
@@ -270,7 +265,7 @@ async function fetchPrice(url) {
   const html = response.data;
 
   const parsedhtml = cheerio.load(html); //html parsing through cheerio
-  let product = ProductFactory.getProduct(url, parsedhtml) //Factory for getting product items
+  let product = ProductFactory.getProduct(url, parsedhtml, response) //Factory for getting product items
   product.url = url;//adding url to product object 
   const date = new Date()
   //Adding the product to product collection
@@ -284,12 +279,15 @@ async function fetchPrice(url) {
     Product.create(product)
   }
   else {
-    doc.priceHistory.push({
-      price: product.price,
-      date: date
-    })
-    doc.price = product.price
-    doc.save();
+    let dbDate=doc.priceHistory[doc.priceHistory.length-1].date.getDay();
+    if (dbDate!==date.getDay()) {
+      doc.priceHistory.push({
+        price: product.price,
+        date: date
+      })
+      doc.price = product.price
+      doc.save();
+    }
   }
   // return product.price;
   return product;

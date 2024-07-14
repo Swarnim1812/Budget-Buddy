@@ -1,42 +1,37 @@
 import "./Sites.css";
-import Input from "../../components/Input";
+import { useState } from "react";
+import Radio from '@mui/material/Radio';
+import RadioGroup from '@mui/material/RadioGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import FormControl from '@mui/material/FormControl';
 
 function Sites({ handleChange }) {
-  return (
-    <div>
-      <h2 className="sidebar-title">Sites</h2>
+  const [value, setValue] = useState('');
 
-      <div>
-        <label className="sidebar-label-container">
-          <input onChange={handleChange} type="radio" value="" name="test" className="sidebarinput"/>
-          <span className="checkmark"></span>All
-        </label>
-        <Input
-          handleChange={handleChange}
-          value="flipkart"
-          title="Flipkart"
-          name="test"
-        />
-        <Input
-          handleChange={handleChange}
-          value="amazon"
-          title="Amazon"
-          name="test"
-        />
-        <Input
-          handleChange={handleChange}
-          value="ajio"
-          title="Ajio"
-          name="test"
-        />
-        <Input
-          handleChange={handleChange}
-          value="indiamart"
-          title="Indiamart"
-          name="test"
-        />
-      </div>
-    </div>  
+  const handleChange1 = (event) => {
+    setValue(event.target.value);
+  };
+  return (
+    <div className="sites_container">
+      <h2 className="sidebar-title">Sites</h2>
+      <FormControl>
+        <RadioGroup
+          aria-labelledby="demo-controlled-radio-buttons-group"
+          name="controlled-radio-buttons-group"
+          value={value}
+          className="siteinputradio"
+          onChange={(e) => {
+            handleChange1(e);
+            handleChange(e);
+          }}
+        > 
+          <FormControlLabel value="" className="siteinput" control={<Radio className="siteinput"/>} label="All" />
+          <FormControlLabel value="flipkart" control={<Radio />} label="Flipkart" className="siteinput"/>
+          <FormControlLabel value="amazon" control={<Radio />} label="Amazon" className="siteinput"/>
+          <FormControlLabel value="indiamart" control={<Radio />} label="Indiamart" className="siteinput"/>
+        </RadioGroup>
+      </FormControl>
+    </div>
   );
 }
 

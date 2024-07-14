@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect} from 'react';
 import Chart from 'react-apexcharts';
-// import { GraphData } from '../db/GraphData';
 
 const Graph = (props) => {
   const ProductURL = props.productURL;
@@ -22,22 +21,19 @@ const Graph = (props) => {
   };
   useEffect(() => {
     fetchdata();
-    if(GraphData.length!==0){
+    if (GraphData.length !== 0) {
       console.log(GraphData);
       setGraphData(GraphData);
     }
     // eslint-disable-next-line
   }, []);
-
   return (
     <React.Fragment>
       <div className='graph'>
-        <h1>Line Chart</h1>
-
         <Chart
           type="line"
           width={600}
-          height={300}
+          height={400}
           series=
           {[
             {
@@ -50,7 +46,7 @@ const Graph = (props) => {
               id: "basic-bar"
             },
             xaxis: {
-              categories: GraphData.map((data) => data.date)
+              categories: GraphData.map((data) => new Date(data.date).toLocaleDateString())
             }
           }}
         />
@@ -58,5 +54,4 @@ const Graph = (props) => {
     </React.Fragment>
   )
 }
-
 export default Graph;

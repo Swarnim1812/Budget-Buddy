@@ -1,13 +1,11 @@
 import { useState, useEffect } from "react";
 import { useUserContext } from "./userContex";
-import Navigation from "../Navigation/Nav";
 import Products from "../Products/Products";
 import Recommended from "../Recommended/Recommended";
 import Sidebar from "../Sidebar/Sidebar";
 import Card from "./Card";
 import "../index.css";
 import { NavLink } from 'react-router-dom';
-// import products from "../db/data";
 
 function Homepage() {
   const userContext = useUserContext();
@@ -16,7 +14,7 @@ function Homepage() {
       credentials: 'include',
     }).then(response => {
       response.json().then(userInfo => {
-        userContext.login(userInfo);
+        userContext.login(userInfo.user_exist);
       })
     })
     // eslint-disable-next-line
@@ -25,6 +23,9 @@ function Homepage() {
   console.log(userContext.user);
   const [email, setEmail] = useState('');
   const [products, setProducts] = useState([]);
+  const [myproducts, setMyproducts] = useState([]);
+  let traderAllProduct=true;
+  const [userType, setUserType] = useState(true);
   useEffect(() => {
     const fetchdata = async () => {
       let temp;
@@ -32,26 +33,24 @@ function Homepage() {
         credentials: 'include',
       });
       temp = await data.json();
-      console.log(temp);
-      console.log(temp.listTitle);
+      console.log(temp.listAllItems);
       setEmail(temp.listTitle);
-      setProducts(Object.values(temp.listItems));
-      console.log(temp);
+      if (temp.checkUser === true) {
+        setUserType(false);
+        setProducts(Object.values(temp.listAllItems));
+        setMyproducts(Object.values(temp.listItems));
+      }
+      else{
+        setProducts(Object.values(temp.listItems));
+        setUserType(true);
+      }
     };
     fetchdata();
     // eslint-disable-next-line
   }, []);
-  const handleInputChange = (event) => {
-    setQuery(event.target.value);
-  };
 
   const [selectedCategory, setSelectedCategory] = useState(null);
-  const [query, setQuery] = useState("");
-
-  // ----------- Input Filter -----------
-  // const filteredItems = products.filter(
-  //   (product) => product.title.toLowerCase().indexOf(query.toLowerCase()) !== -1
-  // );
+  const [query] = useState("");
 
   // ----------- Radio Filtering -----------
   const handleChange = (event) => {
@@ -63,41 +62,50 @@ function Homepage() {
   };
   function filteredData(products, selected, query) {
     let filteredProducts = products;
-    // Filtering Input Items
-    // if (query) {
-    //   filteredProducts = filteredItems;
-    // }
-    // Applying selected filter
     if (selected) {
-      filteredProducts = filteredProducts.filter(
-        ({ category, color, company, price, name, site, tracking }) =>
-          category === selected ||
-          color === selected ||
-          company === selected ||
-          price === selected ||
-          name === selected ||
-          site === selected ||
-          tracking === selected
-      );
+      console.log(selected);
+      console.log(filteredProducts)
+      if (selected !== "MyProds") {
+        if (selected === "LtoH") {
+          filteredProducts = filteredProducts.sort((a, b) => a.price - b.price);
+        }
+        else if (selected === "HtoL") {
+          filteredProducts = filteredProducts.sort((a, b) => b.price - a.price);
+        }
+        else {
+          filteredProducts = filteredProducts.filter(
+            ({ productURL }) => productURL.search(selected) === 12
+          );
+        }
+      }
     }
+    console.log(email)
     return filteredProducts.map(
-      ({ imageUrl, name, star, reviews, prevPrice, price, site, productURL, expectedPrice }) => (
+      ({ imageUrl, name, prevPrice, price, site, productURL, expectedPrice}) => (
         <Card
           key={Math.random()}
           img={imageUrl}
           title={name}
-          star={star}
-          reviews={reviews}
           prevPrice={prevPrice}
           newPrice={price}
           site={site}
           expectedPrice={expectedPrice}
           productURL={productURL}
+          email={email}
+          traderAllProduct={traderAllProduct}
+          userType={userType}
         />
       )
     );
   }
-  const result = filteredData(products, selectedCategory, query);
+  let result = null;
+  if (selectedCategory === "MyProds") {
+    traderAllProduct = false;
+    console.log(myproducts);
+    result = filteredData(myproducts, selectedCategory, query);
+  }
+  else result = filteredData(products, selectedCategory, query);
+
   return (
     <>
       {!username &&
@@ -109,8 +117,7 @@ function Homepage() {
       {username &&
         <div className="homepage">
           <Sidebar handleChange={handleChange} />
-          <Navigation query={query} handleInputChange={handleInputChange} email={email} />
-          <Recommended handleClick={handleClick} />
+          <Recommended handleClick={handleClick} NumProds={myproducts.length} />
           <Products result={result} />
         </div>
       }

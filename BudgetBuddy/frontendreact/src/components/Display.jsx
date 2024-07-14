@@ -1,39 +1,31 @@
 import React from 'react';
-import ReactImageMagnify from 'react-image-magnify';
 import Graph from './Graph';
-import { useLocation,Link } from 'react-router-dom';
-import { AiFillStar } from "react-icons/ai";
-
-const Display = (props) => {
+import { useLocation, Link } from 'react-router-dom';
+import { GoArrowLeft } from "react-icons/go";
+import { BsGraphUpArrow } from "react-icons/bs";
+const Display = () => {
   const location = useLocation();
   const productdata = location.state;
-  const {img,title,newPrice,expectedPrice,productURL}=productdata;
+  const { img, title, expectedPrice, newPrice, productURL } = productdata;
   return (
     <div className='display'>
       <div className='itemsearch'>
-        <div className='cardbox'>
-          <div className='magnifier'>
-            <ReactImageMagnify {...{
-              smallImage: {
-                alt: 'Wristwatch by Ted Baker London',
-                isFluidWidth: true,
-                src: `${img}`,
-              },
-              largeImage: {
-                src:`${img}`,
-                width: 1100,
-                height: 750
-              },
-              shouldUsePositiveSpaceLens: true,
-              isHintEnabled: true,
-            }} />
-          </div>
-          <div className='graphcontainer'>
-            <Graph productURL={productURL}/>
+        <div className='displaycontainer'>
+          <div className='cardbox'>
+            <img src={img} alt='Wristwatch by Ted Baker London' className='productimg' />
+            <h2 className='ptitle'>{title}</h2>
+            <h3 className='pprice'> CURRENT PRICE IS ₹ {newPrice}</h3>
           </div>
         </div>
+        <div className='graphcontainer'>
+          <p className='graphtitle'>Price History {<BsGraphUpArrow />}</p>
+          <Graph productURL={productURL} className='graph' />
+          <p className='linkguide'>You can visit product in its official website at</p>
+          <Link to={productURL} target='_blank'><h4 className='producturl'>{productURL}</h4></Link>
+        </div>
       </div>
-      <Link to='/collections'><button className='gobackbtn'>Go Back</button></Link>
+      <Link to='/collections' className='gobacklink'><button className='gobackbtn'><GoArrowLeft className='gobackarrow' /></button></Link>
+
     </div>
   )
 }
