@@ -1,0 +1,32 @@
+{
+  "name": "budgetbuddy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node backend/index.js",
+    "build": "npm install --legacy-peer-deps && npm install --prefix frontend --legacy-peer-deps && npm run build --prefix frontend",
+    "start": "node backend/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@emotion/react": "^11.13.0",
+    "@emotion/styled": "^11.13.0",
+    "@mui/material": "^5.16.4",
+    "axios": "^1.6.7",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cheerio": "^1.0.0-rc.12",
+    "cookie-parser": "^1.4.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "moongose": "^1.0.0",
+    "node-cron": "^3.0.3",
+    "nodemailer": "^6.9.12",
+    "path": "^0.12.7"
+  },
+  "description": ""
+}

@@ -1,0 +1,58 @@
+.price-title {
+  margin-top: 20px;
+  font-family: "Reddit Sans", sans-serif;
+  color: white ;
+}
+
+.ml {
+  color: white ;
+  margin-top: 10px;
+  background-color: rgba(255, 255, 255, 0.154);
+  border-top: 2px solid rgba(255, 255, 255, 0.411);
+  border-bottom: 2px solid rgba(255, 255, 255, 0.411);
+}
+#demo-simple-select-filled-label{
+  font-family: "Reddit Sans", sans-serif;
+  color: white ;
+}
+#demo-simple-select-filled{
+  background-color: rgba(236, 236, 236, 0.33);
+  color: white;
+}      
+@media (max-width: 1350px) {
+  .ml {
+    width: 11em;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    height: 10em;
+  }
+  .price-title{
+    font-size: 14px;
+    margin: 0;
+    padding: 0;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #demo-simple-select-filled-label{
+    font-size: 13px;
+    font-family: "Reddit Sans", sans-serif;
+  }
+  #demo-simple-select-filled{
+    width: 80px;
+    font-size: 12px;
+  }
+  .css-utk17j-MuiInputBase-root-MuiFilledInput-root-MuiSelect-root{
+    width: 7em;
+    height: 50px;
+  } 
+  .css-1sjfyqd-MuiFormControl-root{
+    align-items: center;
+    justify-content: center;
+    min-width: 0 !important;
+  }
+}
