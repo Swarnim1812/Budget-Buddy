@@ -27,8 +27,8 @@ const Landingpage = () => {
           <h1 className='landingtitle'>Track, compare, save to unlock best deals.</h1>
           <p className='landingdetails'>Stay ahead of the curve with real-time price updates on our comprehensive tracking website.</p>
           <div className='input'>
-            {!username && <NavLink to='http://localhost:3000/login'><button className='landingbtn'>Get Started<GrLogin className='goarrowright'/></button></NavLink>}
-            {username && <NavLink to='http://localhost:3000/collections'><button className='landingbtn'>Go to Collections<GrLogin className='goarrowright'/></button></NavLink>}
+            {!username && <NavLink to='/login'><button className='landingbtn'>Get Started<GrLogin className='goarrowright'/></button></NavLink>}
+            {username && <NavLink to='/collections'><button className='landingbtn'>Go to Collections<GrLogin className='goarrowright'/></button></NavLink>}
           </div>
         </div>
       </div>

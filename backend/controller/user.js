@@ -113,7 +113,7 @@ async function addUrlinDatabase(req, res) {
     listAllItems: listAllProduct,
     checkUser: flag
   }
-  res.render("searchpage", products)
+  return res.status(200).json({ message: "Product added successfully", products });
 }
 //ListYourProduct
 async function yourproductlisting(database) {

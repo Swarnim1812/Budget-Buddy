@@ -15,6 +15,8 @@ const app = express();
 const jwt = require('jsonwebtoken');
 const port = 5000;
 
+require("dotenv").config();
+
 const corsOptions = {
   origin: 'http://localhost:3000',
   credentials: true,            //access-control-allow-credentials:true
@@ -22,8 +24,8 @@ const corsOptions = {
 }
 app.use(cors(corsOptions));
 
-connectToMongoDB("mongodb://127.0.0.1:27017/BudgetBuddy").then(() =>
-  console.log("Mongodb connected")
+connectToMongoDB(process.env.MONGO_URL).then(() =>
+  console.log("Mongodb connected.")
 );
 
 
@@ -64,7 +66,7 @@ app.use(session({
 app.use("/user", userRouterauth);// auth
 app.use("/trader", trader)
 app.use("/forget-password", userRouter);
-app.use("/", checkAuth, userRouter);
+app.use("/", userRouter);
 
 
 app.use(express.static(path.join(_dirname, "/frontend/build")));
