@@ -18,7 +18,7 @@ const port = 5000;
 require("dotenv").config();
 
 const corsOptions = {
-  origin: 'http://localhost:3000',
+  origin: ['http://localhost:3000', 'https://budget-buddy-hoki.onrender.com'],
   credentials: true,            //access-control-allow-credentials:true
   optionSuccessStatus: 200
 }
