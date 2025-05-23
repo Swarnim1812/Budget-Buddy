@@ -39,9 +39,9 @@ async function open_detailed_page(req, res) {
 //Delete database
 async function deleteDatabase(req, res) {
   const URLToDelete = req.body.deleteItemId;
-  const xyz = req.user.email;
+  const xyz = req.body.email;
   var checker = false;
-  const resulttttttt = await User.findOne({ email: req.user.email })
+  const resulttttttt = await User.findOne({ email: req.body.email })
   if (resulttttttt.userType == 'user') {
     await User.updateMany({ "itemsAdded.productURL": URLToDelete }, { $pull: { itemsAdded: { productURL: URLToDelete } } });
   }
@@ -59,7 +59,7 @@ async function deleteDatabase(req, res) {
     }
   }
 
-  const result = await User.findOne({ email: req.user.email })
+  const result = await User.findOne({ email: req.body.email })
 
   let listYourProduct = [];
   let listAllProduct = [];
@@ -113,7 +113,7 @@ async function addUrlinDatabase(req, res) {
     listAllItems: listAllProduct,
     checkUser: flag
   }
-  res.render("searchpage", products)
+  return res.status(200).json({ message: "Product added successfully", products });
 }
 //ListYourProduct
 async function yourproductlisting(database) {

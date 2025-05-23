@@ -17,7 +17,8 @@ const Card = ({ img, title, star, reviews, newPrice, site, expectedPrice, produc
   const del_function = async (e) => {
     e.preventDefault();
     const deleteItemId = productURL;
-    console.log("Deleting item...");
+    console.log("Deleting item.");
+    console.log("email->", email);
     const res = await fetch('http://localhost:5000/delete', {
       credentials: 'include',
       method: 'POST',
