@@ -82,41 +82,13 @@ const Signup = () => {
     setUser({ ...user, [name]: value });
   };
 
-
-  //   const { firstName, lastname, phone_number, email, password, userType } = user;
-  //   console.log("hello from postdata");
-  //   const res = await fetch('http://localhost:5000/user/', {
-  //     method: 'POST',
-  //     headers: {
-  //       'Content-Type': 'application/json'
-  //     },
-  //     body: JSON.stringify({
-  //       firstName,
-  //       lastName: lastname,
-  //       phone_number,
-  //       email,
-  //       password,
-  //       userType
-  //     })
-  //   });
-  //   if (res.ok) {
-  //     window.alert('Registration Successful');
-  //     console.log('Registration Successful');
-  //     history('/login');
-  //   }
-  //   else if (res.status === 400) {
-  //     const data = await res.json();
-  //     console.log(data);
-  //     window.alert(data.error.message);
-  //   }
-  // };
   const redirectToOtpPage = async (e) => {
     setOpen(true);
     const { userType, email } = user;
     if (userType === 'trader') {
       // ---------------------------------------------------------------
       e.preventDefault();
-      const response = await fetch("http://localhost:5000/trader/mail", {
+      const response = await fetch("https://budget-buddy-hoki.onrender.com/trader/mail", {
         method: 'POST',
         body: JSON.stringify({ email }),
         headers: { 'Content-Type': 'application/json' },
@@ -136,7 +108,7 @@ const Signup = () => {
       e.preventDefault();
       const { firstName, lastname, phone_number, email, password, userType } = user;
       console.log("hello from postdata");
-      const res = await fetch('http://localhost:5000/user/', {
+      const res = await fetch('https://budget-buddy-hoki.onrender.com/user/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -176,7 +148,7 @@ const Signup = () => {
           <div className='signupform2'>
             <h1 className='logintitle'>Welcome Back!</h1>
             <p className='signintext'>To keep connected with us please login with your personal info</p>
-            <NavLink to='http://localhost:3000/login' className='signin_redirect'><GoArrowLeft />SIGN IN</NavLink>
+            <NavLink to='/login' className='signin_redirect'><GoArrowLeft />SIGN IN</NavLink>
           </div>
           <form className='signupform' id='register-form'>
             <h1 className='logintitle'>Sign Up</h1>

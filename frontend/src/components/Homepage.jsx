@@ -10,7 +10,7 @@ import { NavLink } from 'react-router-dom';
 function Homepage() {
   const userContext = useUserContext();
   useEffect(() => {
-    fetch('http://localhost:5000/authorized', {
+    fetch('https://budget-buddy-hoki.onrender.com/authorized', {
       credentials: 'include',
     }).then(response => {
       response.json().then(userInfo => {
@@ -29,7 +29,7 @@ function Homepage() {
   useEffect(() => {
     const fetchdata = async () => {
       let temp;
-      const data = await fetch("http://localhost:5000/getallproducts", {
+      const data = await fetch("https://budget-buddy-hoki.onrender.com/getallproducts", {
         credentials: 'include',
       });
       temp = await data.json();
@@ -111,7 +111,7 @@ function Homepage() {
       {!username &&
         <div className="loginfirst">
           <h1>Please Login First</h1>
-          <NavLink to='http://localhost:3000/login'><button className='landingbtn'>Log In</button></NavLink>
+          <NavLink to='/login'><button className='landingbtn'>Log In</button></NavLink>
         </div>
       }
       {username &&

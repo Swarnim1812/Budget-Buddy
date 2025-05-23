@@ -19,7 +19,7 @@ const Card = ({ img, title, star, reviews, newPrice, site, expectedPrice, produc
     const deleteItemId = productURL;
     console.log("Deleting item.");
     console.log("email->", email);
-    const res = await fetch('http://localhost:5000/delete', {
+    const res = await fetch('https://budget-buddy-hoki.onrender.com/delete', {
       credentials: 'include',
       method: 'POST',
       headers: {

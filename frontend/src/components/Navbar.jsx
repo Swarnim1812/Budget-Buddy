@@ -6,7 +6,7 @@ const Navbar = () => {
   const Navigate = useNavigate();
   const userContext = useUserContext();
   useEffect(() => {
-    fetch('http://localhost:5000/user/authorized', {
+    fetch('https://budget-buddy-hoki.onrender.com/user/authorized', {
       credentials: 'include',
     }).then((response) => {
       response.json().then(user => {
@@ -16,7 +16,7 @@ const Navbar = () => {
     // eslint-disable-next-line
   }, []);
   function logout() {
-    fetch('http://localhost:5000/logout', {
+    fetch('https://budget-buddy-hoki.onrender.com/logout', {
       credentials: 'include',
       method: 'GET',
     }).then(() => {

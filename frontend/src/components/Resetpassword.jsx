@@ -8,7 +8,7 @@ const Resetpassword = () => {
   const navigate = useNavigate();
   const submitForm = async (e) => {
     e.preventDefault();
-    const res = await fetch("http://localhost:5000/user/resetPassword/" + token, {
+    const res = await fetch("https://budget-buddy-hoki.onrender.com/user/resetPassword/" + token, {
       method: 'PATCH',
       headers: {
         'Content-Type': 'application/json'

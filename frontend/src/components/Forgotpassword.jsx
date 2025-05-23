@@ -8,7 +8,7 @@ const Forgotpassword = () => {
   const navigate = useNavigate();
   const submitForm = (e) => {
     e.preventDefault();
-    Axios.post("http://localhost:5000/user/forgotPassword", {
+    Axios.post("https://budget-buddy-hoki.onrender.com/user/forgotPassword", {
       email,
     }).then(res => {
       if (res.data.status) {

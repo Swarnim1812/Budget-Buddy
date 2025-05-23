@@ -25,7 +25,7 @@ const Searchitempage = () => {
     const ProductURL = url;
     console.log(ProductURL);
     console.log(expectedPrice)
-    const res = await fetch('http://localhost:5000/addUrlinDatabase', {
+    const res = await fetch('https://budget-buddy-hoki.onrender.com/addUrlinDatabase', {
       credentials: 'include',
       method: 'POST',
       headers: {
@@ -74,7 +74,7 @@ const Searchitempage = () => {
     const ProductURL = P_URL;
     const expectedPrice = ePrice;
     console.log("hello Im sending product details");
-    const res = await fetch('http://localhost:5000/searchproduct/', {
+    const res = await fetch('https://budget-buddy-hoki.onrender.com/searchproduct/', {
       credentials: 'include',
       method: 'POST',
       headers: {

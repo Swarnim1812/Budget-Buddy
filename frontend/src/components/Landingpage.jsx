@@ -6,7 +6,7 @@ import { GrLogin } from "react-icons/gr";
 const Landingpage = () => {
   const userContext = useUserContext();
   useEffect(() => {
-    fetch('http://localhost:5000/user/authorized', {
+    fetch('https://budget-buddy-hoki.onrender.com/user/authorized', {
       credentials: 'include',
     }).then(response => {
       response.json().then(userInfo => {

@@ -11,7 +11,7 @@ const Otpverify = () => {
   // -----------------------------------------------------
   async function otpdata(e) {
     e.preventDefault();
-    const response = await fetch("http://localhost:5000/trader/verify", {
+    const response = await fetch("https://budget-buddy-hoki.onrender.com/trader/verify", {
       method: 'POST',
       body: JSON.stringify({ email, otp }),
       headers: { 'Content-Type': 'application/json' },
@@ -22,7 +22,7 @@ const Otpverify = () => {
       e.preventDefault();
       const { firstName, lastname, phone_number, email, password, userType } = signupdata;
       console.log("hello from postdata");
-      const res = await fetch('http://localhost:5000/user/', {
+      const res = await fetch('https://budget-buddy-hoki.onrender.com/user/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
