@@ -140,7 +140,7 @@ nav {
     margin-left: 0;
   }
 }
-@media (max-width: 425px){
+@media (max-width: 435px){
   nav{
     padding: 0;
   }

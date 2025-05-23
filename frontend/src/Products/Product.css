@@ -162,3 +162,11 @@
     align-items: center;
   }
 }
+@media(max-width: 430px){
+  .card-container{
+    padding-left: 32.5vw;
+  }
+  .card{
+    margin: 10px 20px 90px 23px;
+  }
+}

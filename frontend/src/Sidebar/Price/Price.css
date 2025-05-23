@@ -56,3 +56,9 @@
     min-width: 0 !important;
   }
 }
+
+@media (max-width:430px){
+  .ml{
+    width: 100%;
+  }
+}
