@@ -1570,7 +1570,7 @@ body {
     padding: 0;
     border-top: #9c9c9c 2px solid;
     border-bottom: #9c9c9c 2px solid;
-    margin-bottom: 20px;
+    margin-bottom: 40px;
   }
   .signpuslide{
     width: 80%;
@@ -1655,6 +1655,7 @@ body {
   .producturl{
     font-size: 12px;
     padding: 0px 15px 40px 15px;
+    margin-bottom: 40px;
   }
 }
 

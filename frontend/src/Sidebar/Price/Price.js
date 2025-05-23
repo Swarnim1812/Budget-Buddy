@@ -14,7 +14,7 @@ const Price = ({ handleChange }) => {
     <>
       <div className="ml">
         <h2 className="price-title">Price</h2>
-        <FormControl variant="filled" sx={{ m: 2, minWidth: 170 }}>
+        <FormControl variant="filled" sx={{ m: 2, minWidth: 170 }} className="price-order">
           <InputLabel id="demo-simple-select-filled-label">Sort</InputLabel>
           <Select
             labelId="demo-simple-select-filled-label"

@@ -21,7 +21,7 @@ const Nav = () => {
     e.preventDefault();
     const { ProductURL, expectedPrice } = user;
     console.log("hello item data bhej rha hu");
-    const res = await fetch('http://localhost:5000/searchproduct/', {
+    const res = await fetch('https://budget-buddy-hoki.onrender.com/searchproduct/', {
       credentials: 'include',
       method: 'POST',
       headers: {
@@ -61,7 +61,7 @@ const Nav = () => {
   useEffect(() => {
     const fetchdata = async () => {
       let temp;
-      const data = await fetch("http://localhost:5000/getallproducts", {
+      const data = await fetch("https://budget-buddy-hoki.onrender.com/getallproducts", {
         credentials: 'include',
       });
       temp = await data.json();
@@ -73,7 +73,7 @@ const Nav = () => {
   return (
     <>
       <nav>
-        <h2 className="navtitle1">Welcome, <div className='email_section'>{email}</div><LuSun className="hello" /></h2>
+        <h2 className="navtitle1">Welcome <div className='email_section'>{email}</div><LuSun className="hello" /></h2>
         <div className='formcontainer'>
           <h2 className="navtitle">SEARCH NEW PRODUCT</h2>
           <form className='home_form'>

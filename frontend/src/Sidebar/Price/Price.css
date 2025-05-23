@@ -61,4 +61,7 @@
   .ml{
     width: 100%;
   }
+  .price-order{
+    scale: 0.7;
+  }
 }
