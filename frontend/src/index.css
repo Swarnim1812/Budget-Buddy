@@ -1654,8 +1654,78 @@ body {
   }
   .producturl{
     font-size: 12px;
+    height: 100%;
     padding: 0px 15px 40px 15px;
     margin-bottom: 40px;
+  }
+  .logo-container{
+    margin-top: 3px;
+  }
+  .gobackbtn2{
+    transform: translateX(0em);
+  }
+  .searchpage{
+    height: 100%;
+  }
+  .searchanother{
+    width: 100%; 
+  }
+  .searchanotherinput{
+    width: 12em;
+    height: 40px;
+  }
+  .searchanotherbtn{
+    height: 40px;
+  }
+  .searchitempage{
+    flex-direction: column;
+    background: none;
+    height: 50%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+  }
+  .imagesection{
+    width: 100%;
+    background: none;
+  }
+  .addtotrack{
+    transform: translate(0);
+    margin: 40px 0 10px 0;
+    font-size: 14px;
+  }
+  .imgcontainer{
+    width: 85%;
+    height: 100%;
+    padding: 3vh 0 3vh 0;
+    border-radius: 10px;
+  }
+  .searchdetails{
+    width: 100%;
+    height: 100%;
+    background: none;
+  }
+  .searchtitle{
+    font-size: 16px;
+    letter-spacing: 1px;
+    height: 100%;
+  }
+  .currentpricetag{
+    font-size: 16px;
+  }
+  .currentprice{
+    font-size: 18px;
+  }
+  .expectedpricetag{
+    font-size: 16px;
+  }
+  .expectedprice{
+    font-size: 18px;
+  }
+  .gobackbtn2{
+    font-size: 14px;
+    margin-top: 15px;
   }
 }
 
